@@ -29,3 +29,14 @@ steps:
   displayName: 'Use Python $(python.version)'
   inputs:
     versionSpec: '3.7.10'
+
+- script: |
+    pip install dbt 
+    pip install "dbt-spark[PyHive]" 
+    export PATH=$PATH:/home/vsts_azpcontainer/.local/bin
+    dbt compile
+    dbt seed 
+    dbt run
+    dbt test
+    dbt docs generate
+  displayName: 'Compile, Test, and Run'
