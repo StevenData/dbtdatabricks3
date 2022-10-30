@@ -22,7 +22,7 @@ steps:
   name: SettingProfile
   displayName: 'Downloading Profile for Databricks'
   inputs:
-    secureFile: 'README.md'
+    secureFile: 'profile.yml'
 # There was a resource authorization issue
 
 - task: UsePythonVersion@0
