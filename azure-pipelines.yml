@@ -18,11 +18,11 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-# - task: DownloadSecureFile@1
-#   name: SettingProfile
-#   displayName: 'Downloading Profile for Databricks'
-#   inputs:
-#     secureFile: 'README.md'
+- task: DownloadSecureFile@1
+  name: SettingProfile
+  displayName: 'Downloading Profile for Databricks'
+  inputs:
+    secureFile: 'README.md'
 # There was a resource authorization issue
 
 - task: UsePythonVersion@0
@@ -30,6 +30,12 @@ steps:
   inputs:
     versionSpec: '3.7.10'
 
+- script: |
+    echo Installing $(SettingProfile.secureFilePath) to the ~/.dbt...
+    mkdir ~/.dbt
+    cp $(SettingProfile.secureFilePath) ~/.dbt/profiles.yml
+  displayName: Installing Profile for Databricks
+  
 - script: |
     sudo apt-get update
     sudo apt-get install libsasl2-dev
