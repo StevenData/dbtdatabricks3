@@ -10,13 +10,6 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 
 - task: DownloadSecureFile@1
   name: SettingProfile
@@ -47,7 +40,7 @@ steps:
   
 - script: |
     pip install dbt 
-    pip install "dbt-spark[PyHive]" 
+    pip install dbt-databricks 
     export PATH=$PATH:/home/vsts_azpcontainer/.local/bin
     dbt compile
     dbt seed 
