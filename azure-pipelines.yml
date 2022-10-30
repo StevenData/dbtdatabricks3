@@ -39,7 +39,7 @@ steps:
     pip install cryptography
   displayName: Install prerequisit Linux packages
   
-  - script: |
+- script: |
     pip install dbt 
     pip install "dbt-spark[PyHive]" 
     export PATH=$PATH:/home/vsts_azpcontainer/.local/bin
