@@ -31,6 +31,15 @@ steps:
     versionSpec: '3.7.10'
 
 - script: |
+    sudo apt-get update
+    sudo apt-get install libsasl2-dev
+    sudo apt-get install git libpq-dev python-dev python3-pip 
+    sudo apt-get remove python-cffi
+    pip install --upgrade cffi
+    pip install cryptography
+  displayName: Install prerequisit Linux packages
+  
+  - script: |
     pip install dbt 
     pip install "dbt-spark[PyHive]" 
     export PATH=$PATH:/home/vsts_azpcontainer/.local/bin
