@@ -1,0 +1,24 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'Ubuntu-latest'
+
+steps:
+
+- task: DownloadSecureFile@1
+  name: SettingProfile
+  displayName: 'Downloading Profile for Databricks'
+  inputs:
+    secureFile: 'profiles.yml'
+
+- task: UsePythonVersion@0
+  displayName: 'Use Python $(python.version)'
+  inputs:
+    versionSpec: '3.7.10'
+
+- script: |
+    echo Installing $(SettingProfile.secureFilePath) to the ~/.dbt...
+    mkdir ~/.dbt
+    cp $(SettingProfile.secureFilePath) ~/.dbt/profiles.yml
+  displayName: Installing Profile for Databricks
